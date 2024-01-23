@@ -1,0 +1,45 @@
+
+
+<div class="container mt-4 mb-4"> 
+  <h1>Admin#index</h1>
+  <p>Find me in app/views/admin/index.html.erb</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @users.empty? %>
+        <tr>
+          <td colspan="3">No users</td>
+        </tr>
+      <% else %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.role %></td>
+            <td>
+              <%= form_for(user, url: admin_users_update_path(user.id), method: :patch, html: { class: 'form-inline' }) do |f| %>
+                <div class="input-group mb-2 me-2">
+                  <%= f.text_field :email, class: 'form-control' %>
+                  <button type="submit" class="btn btn-success">Update</button>
+                </div>
+              <% end %>
+              <%= form_for(user, url: admin_users_destroy_path(user.id), method: :delete, html: { class: 'd-inline' }) do |f| %>
+                <button type="submit" class="btn btn-danger" data-confirm="Are you sure?">Delete</button>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- Button to create a new user with added padding -->
+  <div class="text-center mt-4">
+    <%= link_to 'Create New User', admin_users_path, class: 'btn btn-primary btn-lg' %>
+  </div>
+</div>

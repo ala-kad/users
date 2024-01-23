@@ -1,0 +1,18 @@
+<!-- app/views/pages/home.html.erb -->
+<div class="container mt-5">
+  <h1 class="display-4">Welcome to My Website</h1>
+  <p class="lead">Find me in app/views/pages/home.html.erb</p>
+
+  <% if user_signed_in? %>
+    <div class="mt-3">
+      <%= link_to "Admin", admin_index_path, class: "btn btn-primary" if current_user.admin? %>
+      <%= link_to "Create new user", admin_users_path, class: "btn btn-primary"%>
+      <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-danger ml-2" %>
+    </div>
+  <% else %>
+    <div class="mt-3">
+      <%= link_to "Sign In", new_user_session_path, class: "btn btn-success" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-info ml-2" %>
+    </div>
+  <% end %>
+</div>

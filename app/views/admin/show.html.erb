@@ -1,0 +1,13 @@
+
+
+<!-- Update existing users forms -->
+<% @users.each do |user| %>
+  <%= form_for(user, url: admin_users_update_path(user.id), method: :patch, class: 'mb-4') do |f| %>
+    <div class="mb-3">
+      <%= f.label :email, class: "form-label" %>
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+
+    <%= f.submit "Update", class: "btn btn-warning" %>
+  <% end %>
+<% end %>
